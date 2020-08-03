@@ -15,6 +15,14 @@ function cover(aBool){
 function sendUpdate(){
 	ipc.send("update")
 }
+let gGetTimerCallback
+function getTimer(aCallback){
+	gGetTimerCallback=aCallback
+	ipc.send("getTimer")
+}
+ipc.on("getTimer",(e,a)=>{
+	gGetTimerCallback(a)
+})
 
 //window側
 // var iframe = document.getElementById('page').contentWindow;
