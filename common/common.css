@@ -1,0 +1,11 @@
+*{user-select: none;}
+*{cursor: default;}
+.usagiBlue{
+	background: rgb(210,250,240)
+}
+.usagiPink{
+	background: rgb(255,230,230);
+}
+.unicornPurple{
+	background: #ccf;
+}

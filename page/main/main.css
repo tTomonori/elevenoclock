@@ -1,0 +1,49 @@
+#title{
+	margin-left: 40px;
+	margin-top: 20px;
+}
+.flag{
+	width: 100px;
+	height: 50px;
+	background-size: contain !important;
+	cursor: pointer;
+	transition: all 500ms 0s ease;
+	position: fixed;
+	top: 55px;
+	left: 7px;
+	z-index: -1;
+}
+.flag:hover{
+	margin-left: -10px;
+}
+.clip{
+	position: fixed;
+	width: 120px;
+	height: 300px;
+	top:200px;
+	left:5px;
+	background-size: contain !important;
+	-webkit-app-region: drag;
+}
+.page{
+	width: 80%;
+	height: 85%;
+	top:15%;
+	right:0;
+	outline: none;
+	border: 0;
+}
+.backButton{
+	width: 50px;
+	height: 50px;
+	left: 430px;
+	top: 10px;
+}
+#frameCover{
+	width: 80%;
+	height: 85%;
+	top:15%;
+	right:0;
+	outline: none;
+	border: 0;
+}

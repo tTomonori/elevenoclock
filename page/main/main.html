@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>MAIN</title>
+	<link rel="stylesheet" href="./main.css">
+	<link rel="stylesheet" href="../../common/common.css">
+	<link rel="stylesheet" href="../../common/button.css">
+</head>
+<body style="margin:0;margin-left:10%">
+	<div id="title" style="position:fixed;font-size:30px;">いれぶんo'clock</div>
+	<div class="usagiButton buttonB backButton" style="position:fixed;" onclick="openPage('home/home.html')"></div>
+	<img src="../../image/note.jpeg" alt="" style="width:90%;position:fixed;z-index:-1">
+	<div class="flag" style="background:url('../../image/xFlag.png');z-index:-2" onclick="window.close()"></div>
+	<div class="clip" style="background:url('../../image/usagiClip.png')"></div>
+
+	<iframe id="page" class="page" src="../home/home.html" style="position:fixed"></iframe>
+	<div id="frameCover" style="position:fixed;z-index:-5;"></div>
+</body>
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript">
+	window.jQuery = window.$ = require("../../jquery-3.2.1.min.js")
+</script>
+</html>

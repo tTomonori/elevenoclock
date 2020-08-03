@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>EDITPLAN</title>
+	<link rel="stylesheet" href="./editPlan.css">
+	<link rel="stylesheet" href="../../common/common.css">
+	<link rel="stylesheet" href="../../common/alarm.css">
+	<link rel="stylesheet" href="../../common/button.css">
+	<link rel="stylesheet" href="../../common/details.css">
+	<script type="text/javascript" src="../../jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<div class="popupWindow programDetails">
+		<div id="garbageButton" class="garbageButton"></div>
+		<div class="programForm">
+		<input id="plan" class="textFeild" placeholder="予定" type="text" name="name" value="" pattern=".{1,}" required><br>
+		<input id="year" class="textFeild" placeholder="2000" type="number" min="2000" max="3000" name="year" value="" maxlength="4" style="width:4ch;">年
+		<input id="month" class="textFeild" placeholder="1" type="number" min="1" max="12" name="month" value="" maxlength="2" style="width:2ch;">月
+		<input id="date" class="textFeild" placeholder="1" type="number" min="1" max="31" name="date" value="" maxlength="2" style="width:2ch;">日
+		<input id="period" class="textFeild" placeholder="0" type="number" min="0" name="period" value="" maxlength="4" style="width:4ch;">日間&nbsp
+		<br>
+		<input id="notice" class="textFeild" placeholder="0" type="number" min="0" name="notice" value="" maxlength="4" style="width:4ch;">日前から通知<br>
+		アラーム&nbsp&nbsp On<input id="alarmOn" class="checkbox" type="checkbox" name="alarmOn" value="">
+		<div id="alarmFeild" class="alarmFeild" style="height:150px;">
+			<div class="usagiButton buttonG" name="newAlarmButton" style="width:30px;height:30px;margin-bottom:-5px;margin-top:2px"></div>
+		</div>
+		<textarea id="remark" class="textFeild" placeholder="備考" type="text" name="remark" value="" style="margin-top:35px;width:100%;height:5em;" rows="2"></textarea>
+		</div>
+		<div id="buttonX" class="usagiButton buttonX" style="width:50px;height:50px;"></div>
+		<div class="" style="width:calc(100% - 150px);height:1px;display:inline-block;"></div>
+		<div id="buttonO" class="usagiButton buttonO" style="width:50px;height:50px;"></div>
+	</div>
+</body>
+<script type="text/javascript" src="./editPlan.js"></script>
+<script type="text/javascript" src="../../popup/PopupWindow.js"></script>
+<script type="text/javascript" src="../../popup/ConfirmationWindow.js"></script>
+<script type="text/javascript" src="../../popup/AlartWindow.js"></script>
+</html>
