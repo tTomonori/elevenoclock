@@ -36,6 +36,7 @@ app.on('ready', ()=>{
   gAlarmMonitor.setAlarmFunc(gettedAlarmData)
   gAlarmMonitor.set()
   electron.powerMonitor.on("resume",()=>{
+    console.log("resume");
     gAlarmMonitor.review()
   })
 })

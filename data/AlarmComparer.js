@@ -55,7 +55,6 @@ class AlarmComparer{
 		switch (aAlarm.par) {
 			case "parDate":
 				let tParDate=new MyDate(aDate1.getTime())
-				tParDate.setDate(tParDate.getDate()-1)
 				tParDate.nextHours(tDate.getHours(),tDate.getMinutes())
 				if(tParDate.getTime()<aDate2.getTime())return tParDate;
 				else return null;
@@ -67,7 +66,7 @@ class AlarmComparer{
 				if((tParWeek.getTime()-aDate1.getTime())<0){
 					tParWeek.setDate(tParWeek.getDate()+7)
 				}
-				if(tParWeek.getTime()<aData2.getTime())return tParWeek;
+				if(tParWeek.getTime()<aDate2.getTime())return tParWeek;
 				else return null;
 				break;
 			case "onTime":

@@ -55,8 +55,8 @@ class AlarmSearcher{
 			let tTime=AlarmComparer.searchLatestAlarm(aDate,tData.alarm)
 			if(tTime==null)continue
 			if(tDataList[0]==null){
-				tDataList=[tData]
 				tLatestTime=tTime
+				tDataList=[{data:tData,time:tLatestTime}]
 			}else{
 				if(tTime.getTime()<tLatestTime.getTime()){
 					tLatestTime=tTime
@@ -72,7 +72,7 @@ class AlarmSearcher{
 		let tDataList=[]
 		for(let i=0;i<aList.length;i++){
 			let tData=aList[i]
-			let tTimeList=AlarmComparer.searchPassedAlarm(aDate1,aDate2,tData)
+			let tTimeList=AlarmComparer.searchPassedAlarm(aDate1,aDate2,tData.alarm)
 			for(let j=0;j<tTimeList.length;j++){
 				tDataList.push({data:tData,time:tTimeList[j]})
 			}

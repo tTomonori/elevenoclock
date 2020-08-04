@@ -12,11 +12,11 @@ class AlarmMonitor{
 		}
 	}
 	set(){
+		console.log("set");
 		this.clearTimer()
 		this.lastSetTime=new Date()
 		this.searcher.getNextAlarm(this.lastSetTime,(aData)=>{
-			if(aData[0]==null)return;
-			console.log(aData);
+			if(aData.length==0)return;
 			this.timer=setTimeout(()=>{
 				for(let i=0;i<aData.length;i++){
 					this.alarmCallback(aData[i])
@@ -31,8 +31,8 @@ class AlarmMonitor{
 			for(let i=0;i<aData.length;i++){
 				this.alarmCallback(aData[i])
 			}
+			setTimeout(()=>{this.set()},10)
 		})
-		this.set()
 	}
 }
 module.exports = AlarmMonitor;
