@@ -65,7 +65,7 @@ function createAlarmWindow(aName,aHour,aMinute,aType){
 }
 //アラームウィンドウ生成データからウィンドウ生成
 function gettedAlarmData(aData){
-  createAlarmWindow(aData.data.name,aData.time.getHours(),aData.time.getMinutes(),aData.type)
+  createAlarmWindow(aData.data.name,aData.time.getHours(),aData.time.getMinutes(),aData.data.type)
 }
 
 ipcMain.on("update",(e,a)=>{

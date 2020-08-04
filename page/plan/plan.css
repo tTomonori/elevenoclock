@@ -8,11 +8,14 @@
 	transition: all 500ms 50ms ease;
 	margin-bottom: 10px;
 	cursor: pointer;
-	position: fixed;
 }
 .planBar *{
 	cursor: pointer;
 }
 .planBar:hover{
 	margin-left: 10px;
+}
+
+.barContainer{
+	overflow-Y:scroll;
 }

@@ -15,18 +15,24 @@ class AlarmMonitor{
 		this.clearTimer()
 		this.lastSetTime=new Date()
 		this.searcher.getNextAlarm(this.lastSetTime,(aData)=>{
-			if(aData.data[0]==null)return;
+			if(aData[0]==null)return;
+			console.log(aData);
 			this.timer=setTimeout(()=>{
-				for(let i=0;i<aData.data.length;i++){
-					this.alarmCallback({data:aData.data[i],time:aData.time})
+				for(let i=0;i<aData.length;i++){
+					this.alarmCallback(aData[i])
 				}
 				this.set()
-			},aData.time.getTime()-Date.now())
+			},aData[0].time.getTime()-Date.now())
 		})
 	}
 	review(aCallback){
 		this.clearTimer()
-
+		this.searcher.getPassedAlarm(this.lastSetTime,new Date(),(aData)=>{
+			for(let i=0;i<aData.length;i++){
+				this.alarmCallback(aData[i])
+			}
+		})
+		this.set()
 	}
 }
 module.exports = AlarmMonitor;

@@ -8,11 +8,13 @@
 	transition: all 500ms 50ms ease;
 	margin-bottom: 10px;
 	cursor: pointer;
-	position: fixed;
 }
 .alarmBar *{
 	cursor: pointer;
 }
 .alarmBar:hover{
 	margin-left: 10px;
+}
+.barContainer{
+	overflow-Y:scroll;
 }

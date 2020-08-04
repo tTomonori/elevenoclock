@@ -59,17 +59,25 @@ class AlarmSearcher{
 				tLatestTime=tTime
 			}else{
 				if(tTime.getTime()<tLatestTime.getTime()){
-					tDataList=[tData]
 					tLatestTime=tTime
+					tDataList=[{data:tData,time:tLatestTime}]
 				}else if(tTime.getTime()==tLatestTime.getTime()){
-					tDataList.push(tData)
+					tDataList.push({data:tData,time:tLatestTime})
 				}
 			}
 		}
-		return {data:tDataList,time:tLatestTime}
+		return tDataList
 	}
 	getPassedAlarmData(aDate1,aDate2,aList){
-
+		let tDataList=[]
+		for(let i=0;i<aList.length;i++){
+			let tData=aList[i]
+			let tTimeList=AlarmComparer.searchPassedAlarm(aDate1,aDate2,tData)
+			for(let j=0;j<tTimeList.length;j++){
+				tDataList.push({data:tData,time:tTimeList[j]})
+			}
+		}
+		return tDataList;
 	}
 }
 module.exports = AlarmSearcher;
