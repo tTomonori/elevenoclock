@@ -48,12 +48,12 @@ class AlarmDatabase extends NeDatabase{
 			super.update(aId,aPlan.convertToObject(),()=>{aCallback(true)})
 			return;
 		}
-		this.get(aId,(a)=>{
+		this.get(aPlan._id,(a)=>{
 			if(a!=null){//idが被った
 				aCallback(false)
 				return;
 			}
-			super.update(aPlan.convertToObject(),()=>{aCallback(true)})
+			super.update(aId,aPlan.convertToObject(),()=>{aCallback(true)})
 		})
 	}
 }

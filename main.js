@@ -2,44 +2,39 @@ const electron = require('electron')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const ipcMain = electron.ipcMain
+const Tray = electron.Tray
+const image = electron.nativeImage
+const Menu = electron.Menu
 
 const path = require('path')
 const url = require('url')
 
 const AlarmMonitor = require("./main/AlarmMonitor")
 
+let gScreenSize;
 let gMainWindow
 let gAlarmWindows=[]
+let gDayWindow
 let gAlarmMonitor=new AlarmMonitor()
 
-function createWindow () {
+// app.dock.hide()
 
-  gMainWindow = new BrowserWindow({width: 600, height: 700, transparent: true, frame: false, resizable:false, hasShadowcd:false})
-  gMainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'page/main/main.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
-
-
-  // Open the DevTools.
-  gMainWindow.webContents.openDevTools()
-
-
-  gMainWindow.on('closed', function () {
-    electron.session.defaultSession.clearCache(() => {})
-    gMainWindow = null;
-  })
-}
 app.on('ready', ()=>{
-  createWindow()
+  gScreenSize=electron.screen.getPrimaryDisplay().workAreaSize;
+
+  // createWindow()
+  createDayWindow()
+  createTray()
+
   gAlarmMonitor.setAlarmFunc(gettedAlarmData)
   gAlarmMonitor.set()
+
   electron.powerMonitor.on("resume",()=>{
     console.log("resume");
     gAlarmMonitor.review()
   })
 })
+
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') {
     app.quit()
@@ -51,6 +46,42 @@ app.on('activate', function () {
   }
 })
 
+//dayウィンドウ生成
+function createDayWindow(){
+  if(gDayWindow!=null)return;
+  gDayWindow = new BrowserWindow({width: 466, height: 615,x: gScreenSize.width, y: 0, transparent: true, frame: false, resizable:false, hasShadowcd:false})
+  gDayWindow.loadURL(url.format({
+    pathname: path.join(__dirname, 'dayWindow/dayWindow.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
+
+  // Open the DevTools.
+  // gDayWindow.webContents.openDevTools()
+
+  gDayWindow.on('closed', function () {
+    electron.session.defaultSession.clearCache(() => {})
+    gDayWindow = null;
+  })
+}
+//エディタウィンドウ生成
+function createWindow () {
+  if(gMainWindow!=null)return;
+  gMainWindow = new BrowserWindow({width: 600, height: 700, transparent: true, frame: false, resizable:false, hasShadowcd:false})
+  gMainWindow.loadURL(url.format({
+    pathname: path.join(__dirname, 'page/main/main.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
+
+  // Open the DevTools.
+  // gMainWindow.webContents.openDevTools()
+
+  gMainWindow.on('closed', function () {
+    electron.session.defaultSession.clearCache(() => {})
+    gMainWindow = null;
+  })
+}
 //アラームのウィンドウ生成
 function createAlarmWindow(aName,aHour,aMinute,aType){
   for(let i=0;;i++){
@@ -73,3 +104,33 @@ ipcMain.on("update",(e,a)=>{
   console.log("update");
   gAlarmMonitor.set();
 })
+
+//メニューバーにアイコン追加
+function createTray(){
+  mTray = new Tray(image.createFromPath(__dirname+"/image/icon.png").resize({width:20,height:20}));
+  var tTrayMenu=[
+    { label: "通知", click:createDayWindow },
+    { label: "編集", click:createWindow },
+  ]
+  mTray.setContextMenu(Menu.buildFromTemplate(tTrayMenu));
+  //ショートカットキー系
+  var template = [{
+    label: "Application",
+    submenu: [
+      { label: "About Application", selector: "orderFrontStandardAboutPanel:" },
+      { type: "separator" },
+      // { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
+    ]}, {
+      label: "Edit",
+      submenu: [
+        { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
+        { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
+        { type: "separator" },
+        { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
+        { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
+        { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
+        { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" },
+      ]}
+    ];
+    Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+}

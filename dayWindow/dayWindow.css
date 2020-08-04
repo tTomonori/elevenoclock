@@ -1,0 +1,38 @@
+#board{
+	position: fixed;
+	z-index: -1;
+	width: 100%;
+	top: 0;
+	left: 0;
+}
+#close{
+	position: fixed;
+	width: 50px;
+	left: 416px;
+	top: 5px
+}
+#close:active{
+	margin-top: 3px;
+}
+#content{
+	width: 410px;
+	height: 555px;
+	margin: 30px;
+	overflow-Y:scroll;
+}
+#usagi{
+	position: fixed;
+	z-index: 2;
+	width: 200px;
+	top:440px;
+	left:266px;
+}
+.bar{
+	font-size: 30px
+}
+.leftDay{
+
+}
+.planName{
+	
+}
