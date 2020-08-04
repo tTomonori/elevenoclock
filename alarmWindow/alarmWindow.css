@@ -32,3 +32,10 @@
 	top:100px;
 	left:100px;
 }
+#type{
+	position: fixed;
+	z-index: -2;
+	width: 100px;
+	top:50px;
+	left:150px;
+}

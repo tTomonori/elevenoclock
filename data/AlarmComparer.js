@@ -1,9 +1,9 @@
 class AlarmComparer{
-	searchLatestAlarm(aDate,aAlarms){
+	static searchLatestAlarm(aDate,aAlarms){
 		let tLatest=null
 		for(let i=0;i<aAlarms.length;i++){
 			let tAlarm=aAlarms[i]
-			let tDate=getNextAlarm(aDate,tAlarm)
+			let tDate=this.getNextAlarm(aDate,tAlarm)
 			if(tDate==null)continue;
 			if(tLatest==null){
 				tLatest=tDate
@@ -15,17 +15,17 @@ class AlarmComparer{
 		}
 		return tLatest
 	}
-	searchPassedAlarm(aDate1,aDate2,aAlarms){
+	static searchPassedAlarm(aDate1,aDate2,aAlarms){
 		let tList=[]
 		for(let i=0;i<aAlarms.length;i++){
 			let tAlarm=aAlarms[i]
-			let tDate=getPassedAlarm(aDate1,aDate2,tAlarm)
+			let tDate=this.getPassedAlarm(aDate1,aDate2,tAlarm)
 			if(tDate==null)continue;
 			tList.push(tDate)
 		}
 		return tList
 	}
-	getNextAlarm(aDate,aAlarm){
+	static getNextAlarm(aDate,aAlarm){
 		let tDate=new MyDate(aAlarm.time)
 		switch (aAlarm.par) {
 			case "parDate":
@@ -49,7 +49,7 @@ class AlarmComparer{
 			default:throw new Error("PopupWindow : 「"+aAlarm.par+"」ってなに?");
 		}
 	}
-	getPassedAlarm(aDate1,aDate2,aAlarm){
+	static getPassedAlarm(aDate1,aDate2,aAlarm){
 		let tDate=new MyDate(aAlarm.time)
 		switch (aAlarm.par) {
 			case "parDate":

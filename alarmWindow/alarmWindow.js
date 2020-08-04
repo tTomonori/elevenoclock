@@ -23,8 +23,20 @@ window.onload=()=>{
 	let tTime=document.getElementById("time")
 	tTime.textContent=queryObject.hour+"時"+queryObject.minute+"分"
 
-	let tUsas=["1/download-0.png","1/download-10.png","1/download-33.png","1/download-36.png","2/download-0.png","2/download-1.png",,"2/download-2.png","2/download-3.png","2/download-32.png"]
-	let tIndex=Math.floor( Math.random()*(tUsas.length-1) );
+	let tUsas=["1/download-0.png","1/download-10.png","1/download-33.png","1/download-36.png","2/download-0.png","2/download-1.png","2/download-2.png","2/download-3.png","2/download-32.png"]
+	let tIndex=Math.floor( Math.random()*(tUsas.length) );
 	let tUsagi=document.getElementById("usagi")
 	tUsagi.src="../image/stamp/"+tUsas[tIndex]
+
+  let tType=document.getElementById("type")
+  console.log(queryObject.type);
+  switch (queryObject.type) {
+    case "plan":
+      tType.src="../image/binder.png"
+      break;
+    case "alarm":
+      tType.src="../image/megaphone.png"
+      break;
+    default:
+  }
 }

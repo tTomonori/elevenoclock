@@ -17,8 +17,8 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
-  createAlarmWindow("テストのよていだよーん",20,9)
-  setTimeout(()=>{createAlarmWindow("テストのよていだよーん",20,9)},5000)
+  createAlarmWindow("テストのよていだよーん",20,9,"plan")
+  setTimeout(()=>{createAlarmWindow("テストのよていだよーん",20,9,"alarm")},5000)
 
   // Open the DevTools.
   gMainWindow.webContents.openDevTools()
@@ -41,11 +41,11 @@ app.on('activate', function () {
   }
 })
 
-function createAlarmWindow(aName,aHour,aMinute){
+function createAlarmWindow(aName,aHour,aMinute,aType){
   for(let i=0;;i++){
     if(gAlarmWindows[i]!=null)continue;
     gAlarmWindows[i] = new BrowserWindow({width: 250, height: 250,x:250*i,y:0, transparent: true, frame: false, resizable:false, hasShadowcd:false})
-    gAlarmWindows[i].loadURL(`file://${__dirname}/alarmWindow/alarmWindow.html?name=`+aName+"&hour="+aHour+"&minute="+aMinute)
+    gAlarmWindows[i].loadURL(`file://${__dirname}/alarmWindow/alarmWindow.html?name=`+aName+"&hour="+aHour+"&minute="+aMinute+"&type="+aType)
     gAlarmWindows[i].webContents.openDevTools()
     gAlarmWindows[i].on('closed', function () {
       gAlarmWindows[i]=null
