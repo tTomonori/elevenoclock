@@ -1,0 +1,49 @@
+.textFeild{
+	border-bottom: solid 2px rgb(204, 204, 255);
+	font-size: 30px;
+}
+.textFeild:focus{
+	border-bottom: solid 2px rgb(180, 180, 235);
+}
+.buttons{
+	position: fixed;
+	margin-left: 20px;
+	margin-top: 300px;
+	font-size: 30px;
+}
+.buttonName{
+	display: inline-block;
+	margin-top: -10px;
+}
+
+
+.timerFeild{
+	position: fixed;
+	margin-top: 150px;
+}
+.feildContainer *{
+	position: fixed;
+	font-size: 80px;
+	display: inline-block;
+}
+.feildContainer *:nth-child(1){
+	left:10px;
+}
+.feildContainer *:nth-child(3){
+	left:120px;
+}
+.feildContainer *:nth-child(5){
+	left:230px;
+}
+.feildContainer *:nth-child(7){
+	left:340px;
+}
+.feildContainer *:nth-child(2){
+	left:100px;
+}
+.feildContainer *:nth-child(4){
+	left:210px;
+}
+.feildContainer *:nth-child(6){
+	left:320px;
+}

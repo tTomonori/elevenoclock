@@ -1,0 +1,6 @@
+.textFeild{
+	border-bottom: solid 2px rgb(210,250,240) !important;
+}
+.textFeild:focus{
+	border-bottom: solid 2px rgb(185,220,240) !important;
+}

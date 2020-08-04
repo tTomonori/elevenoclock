@@ -10,28 +10,32 @@ const path = require('path')
 const url = require('url')
 
 const AlarmMonitor = require("./main/AlarmMonitor")
+const MainTimer = require("./main/MainTimer")
 
 let gScreenSize;
 let gMainWindow
 let gAlarmWindows=[]
 let gDayWindow
 let gAlarmMonitor=new AlarmMonitor()
+let gMainTimer=new MainTimer()
 
-// app.dock.hide()
+app.dock.hide()
 
 app.on('ready', ()=>{
   gScreenSize=electron.screen.getPrimaryDisplay().workAreaSize;
 
-  // createWindow()
+  createWindow()
   createDayWindow()
   createTray()
 
   gAlarmMonitor.setAlarmFunc(gettedAlarmData)
   gAlarmMonitor.set()
+  gMainTimer.setTimerCallback(timerRing)
 
   electron.powerMonitor.on("resume",()=>{
     console.log("resume");
-    gAlarmMonitor.review()
+    gAlarmMonitor.resume()
+    gMainTimer.resumeTimer()
   })
 })
 
@@ -88,7 +92,7 @@ function createAlarmWindow(aName,aHour,aMinute,aType){
     if(gAlarmWindows[i]!=null)continue;
     gAlarmWindows[i] = new BrowserWindow({width: 250, height: 250,x:250*i,y:0, transparent: true, frame: false, resizable:false, hasShadowcd:false})
     gAlarmWindows[i].loadURL(`file://${__dirname}/alarmWindow/alarmWindow.html?name=`+aName+"&hour="+aHour+"&minute="+aMinute+"&type="+aType)
-    gAlarmWindows[i].webContents.openDevTools()
+    // gAlarmWindows[i].webContents.openDevTools()
     gAlarmWindows[i].on('closed', function () {
       gAlarmWindows[i]=null
     })
@@ -99,10 +103,24 @@ function createAlarmWindow(aName,aHour,aMinute,aType){
 function gettedAlarmData(aData){
   createAlarmWindow(aData.data.name,aData.time.getHours(),aData.time.getMinutes(),aData.data.type)
 }
+//メインタイマーの時間がきた
+function timerRing(aDate){
+  createAlarmWindow("タイマー",aDate.getHours(),aDate.getMinutes(),"timer")
+}
 
 ipcMain.on("update",(e,a)=>{
   console.log("update");
   gAlarmMonitor.set();
+})
+
+ipcMain.on("getTimer",(e,a)=>{
+  gMainWindow.send("getTimer",gMainTimer.getTimer())
+})
+ipcMain.on("setTimer",(e,a)=>{
+  gMainTimer.setTimer(a)
+})
+ipcMain.on("stopTimer",(e,a)=>{
+  gMainTimer.stopTimer
 })
 
 //メニューバーにアイコン追加

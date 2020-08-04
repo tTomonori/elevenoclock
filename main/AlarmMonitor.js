@@ -25,7 +25,7 @@ class AlarmMonitor{
 			},aData[0].time.getTime()-Date.now())
 		})
 	}
-	review(aCallback){
+	resume(aCallback){
 		this.clearTimer()
 		this.searcher.getPassedAlarm(this.lastSetTime,new Date(),(aData)=>{
 			for(let i=0;i<aData.length;i++){

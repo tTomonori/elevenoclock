@@ -5,18 +5,37 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>TIMER</title>
-	<link rel="stylesheet" href="./timer.css">
 	<link rel="stylesheet" href="../../common/details.css">
+	<link rel="stylesheet" href="../../common/button.css">
+	<link rel="stylesheet" href="./timer.css">
 </head>
 <body>
-		<div class="onTimeOption alarmOption">
-			<input class="textFeild" placeholder="2000" type="number" min="2000" max="3000" name="year" value="" maxlength="4" style="width:4ch;">年
-			<input class="textFeild" placeholder="1" type="number" min="1" max="12" name="month" value="" maxlength="2" style="width:2ch;">月
-			<input class="textFeild" placeholder="1" type="number" min="1" max="31" name="date" value="" maxlength="2" style="width:2ch;">日
-			<input class="textFeild" placeholder="0" type="number" min="0" max="23" name="hour" value="" maxlength="2" style="width:2ch;">時
-			<input class="textFeild" placeholder="0" type="number" min="0" max="59" name="minute" value="" maxlength="2" style="width:2ch;">分
+	<div class="timerFeild">
+		<div class="textAlarm feildContainer" style="margin-top:23px">
+			<input class="textFeild" placeholder="00" type="number" min="0" max="24" name="hour" value="" maxlength="2" style="width:2ch;">
+			<div class="separator">:</div>
+			<input class="textFeild" placeholder="00" type="number" min="0" max="59" name="minute" value="" maxlength="2" style="width:2ch;">
+			<div class="separator">:</div>
+			<input class="textFeild" placeholder="00" type="number" min="0" max="59" name="second" value="" maxlength="2" style="width:2ch;">
+			<div class="separator">:</div>
+			<input class="textFeild" placeholder="00" type="number" min="0" max="99" name="second" value="" maxlength="2" style="width:2ch;">
 		</div>
-		<div class="garbageButton" style="width:19px;height:24px;"></div>
+		<div class="divAlarm feildContainer" style="margin-top:23px;display:none">
+			<div class="divFeild" style="width:2ch;">00</div>
+			<div class="separator">:</div>
+			<div class="divFeild" style="width:2ch;">00</div>
+			<div class="separator">:</div>
+			<div class="divFeild" style="width:2ch;">00</div>
+			<div class="separator">:</div>
+			<div class="divFeild" style="width:2ch;">00</div>
+		</div>
+	</div>
+
+		<div class="buttons">
+			<div class="buttonName">スタート</div><div class="usagiButton buttonO" style="width:50px;height:50px" onclick="clickStart()"></div>
+			<div class="buttonName">ストップ</div><div class="usagiButton buttonX" style="width:50px;height:50px" onclick="clickStop()"></div>
+		</div>
+
 </body>
 <script type="text/javascript" src="./timer.js"></script>
 </html>
