@@ -6,8 +6,11 @@ const ipcMain = electron.ipcMain
 const path = require('path')
 const url = require('url')
 
+const AlarmMonitor = require("./main/AlarmMonitor")
+
 let gMainWindow
 let gAlarmWindows=[]
+let gAlarmMonitor=new AlarmMonitor()
 
 function createWindow () {
 
@@ -17,8 +20,7 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
-  createAlarmWindow("テストのよていだよーん",20,9,"plan")
-  setTimeout(()=>{createAlarmWindow("テストのよていだよーん",20,9,"alarm")},5000)
+
 
   // Open the DevTools.
   gMainWindow.webContents.openDevTools()
@@ -29,7 +31,14 @@ function createWindow () {
     gMainWindow = null;
   })
 }
-app.on('ready', createWindow)
+app.on('ready', ()=>{
+  createWindow()
+  gAlarmMonitor.setAlarmFunc(gettedAlarmData)
+  gAlarmMonitor.set()
+  electron.powerMonitor.on("resume",()=>{
+    gAlarmMonitor.review()
+  })
+})
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') {
     app.quit()
@@ -41,6 +50,7 @@ app.on('activate', function () {
   }
 })
 
+//アラームのウィンドウ生成
 function createAlarmWindow(aName,aHour,aMinute,aType){
   for(let i=0;;i++){
     if(gAlarmWindows[i]!=null)continue;
@@ -53,14 +63,12 @@ function createAlarmWindow(aName,aHour,aMinute,aType){
     return;
   }
 }
+//アラームウィンドウ生成データからウィンドウ生成
+function gettedAlarmData(aData){
+  createAlarmWindow(aData.data.name,aData.time.getHours(),aData.time.getMinutes(),aData.type)
+}
 
 ipcMain.on("update",(e,a)=>{
   console.log("update");
-})
-ipcMain.on("getTimer",(e,a)=>{
-  console.log("getTimer");
-  gMainWindow.send("getTimer",{})
-})
-ipcMain.on("setTimer",(e,a)=>{
-  console.log("setTimer");
+  gAlarmMonitor.set();
 })

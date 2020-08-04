@@ -1,6 +1,7 @@
 const MyDate=require("../common/MyDate.js")
 class Plan{
 	init(aPlan){
+		this.type="plan"
 		this.name=(aPlan.name==null)?"新しい予定":aPlan.name
 		this.time=(aPlan.time==null)?Date.now():Number(aPlan.time)
 		this.myDate=new MyDate(this.time)

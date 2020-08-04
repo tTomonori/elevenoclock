@@ -4,6 +4,9 @@ class ConfigDatabase extends NeDatabase{
 		super.load("database/config.db")
 	}
 	getDbDirPath(aCallback){
+		// aCallback("/Users/tomo/Library/myTools/11o'clock_plans");
+		// return;
+
 		this.db.find({"_id":"config"},(err,doc)=>{
 			aCallback(doc[0].dbDirPath)
 		})

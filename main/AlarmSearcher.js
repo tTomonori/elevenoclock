@@ -1,40 +1,58 @@
+const ConfigDatabase = require("../dbscript/ConfigDatabase");
 const PlanDatabase = require("../dbscript/PlanDatabase");
 const AlarmDatabase = require("../dbscript/AlarmDatabase");
 const AlarmComparer = require("../data/AlarmComparer");
 
 class AlarmSearcher{
-	reload(aCallback){
-		this.pDb=new PlanDatabase();
-		this.pDb.load(()=>{
-			this.aDb=new AlarmDatabase();
-			this.aDb.load(()=>{
-				aCallback();
-			})
+	getDbDirPath(aCallback){
+		if(this.dirPath!=null){
+			aCallback(this.dirPath)
+			return;
+		}
+		this.cDb=new ConfigDatabase();
+		this.cDb.load();
+		this.cDb.getDbDirPath((aPath)=>{
+				this.dirPath=aPath
+				aCallback(aPath)
 		})
 	}
-	getNextAlarm(aCallback){
-		
+	reload(aCallback){
+		this.getDbDirPath((aPath)=>{
+			this.pDb=new PlanDatabase();
+			this.pDb.load(()=>{
+				this.aDb=new AlarmDatabase();
+				this.aDb.load(()=>{
+					aCallback();
+				},aPath)
+			},aPath)
+		})
+	}
+	getNextAlarm(aDate,aCallback){
+		this.getDataList((aList)=>{
+			aCallback(this.getNextAlarmData(aDate,aList))
+		})
+	}
+	getPassedAlarm(aDate1,aDate2,aCallback){
+		this.getDataList((aList)=>{
+			aCallback(this.getPassedAlarmData(aDate1,aDate2,aList))
+		})
 	}
 	getDataList(aCallback){
-		this.pDb=new PlanDatabase()
-		this.pDb.load(()=>{
+		this.reload(()=>{
 			this.pDb.getAllPlans((aPlans)=>{
-				this.aDb=new AlarmDatabase()
-				this.aDb.load(()=>{
-					this.aDb.getAllAlarms((aAlarms)=>{
-						aCallback(aPlans.concat(aAlarms))
-					})
+				this.aDb.getAllAlarms((aAlarms)=>{
+					aCallback(aPlans.concat(aAlarms))
 				})
 			})
 		})
 	}
-	getNextAlarmData(aDate,aData){
+	getNextAlarmData(aDate,aList){
 		let tLatestTime
 		let tDataList=[]
-		for(let i=0;i<aData.length;i++){
-			let tData=aData[i]
+		for(let i=0;i<aList.length;i++){
+			let tData=aList[i]
 			if(!tData.alarmOn)continue;
-			let tTime=searchLatestAlarm(tData)
+			let tTime=AlarmComparer.searchLatestAlarm(aDate,tData.alarm)
 			if(tTime==null)continue
 			if(tDataList[0]==null){
 				tDataList=[tData]
@@ -49,6 +67,9 @@ class AlarmSearcher{
 			}
 		}
 		return {data:tDataList,time:tLatestTime}
+	}
+	getPassedAlarmData(aDate1,aDate2,aList){
+
 	}
 }
 module.exports = AlarmSearcher;

@@ -1,6 +1,7 @@
 const MyDate=require("../common/MyDate.js")
 class Alarm{
 	init(aData){
+		this.type="alarm"
 		this.name=(aData.name==null)?"新しいアラーム":aData.name
 		this.alarm=(aData.alarm==null)?[]:aData.alarm
 		this.alarmOn=(aData.alarmOn==null)?true:aData.alarmOn

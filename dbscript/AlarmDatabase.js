@@ -2,7 +2,12 @@ let Alarm=require("../data/Alarm.js")
 let NeDatabase=require("./NeDatabase.js")
 let ConfigDatabase=require("./ConfigDatabase.js")
 class AlarmDatabase extends NeDatabase{
-	load(aCallback){
+	load(aCallback,aDirPath){
+		if(aDirPath!=null){
+			super.load(aDirPath+"/alarms.db");
+			aCallback();
+			return;
+		}
 		this.configDb=new ConfigDatabase();
 		this.configDb.load();
 		this.configDb.getDbDirPath((aPath)=>{

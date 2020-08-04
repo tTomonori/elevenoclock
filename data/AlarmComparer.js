@@ -1,3 +1,4 @@
+const MyDate = require("../common/MyDate");
 class AlarmComparer{
 	static searchLatestAlarm(aDate,aAlarms){
 		let tLatest=null
@@ -29,21 +30,21 @@ class AlarmComparer{
 		let tDate=new MyDate(aAlarm.time)
 		switch (aAlarm.par) {
 			case "parDate":
-				let tNextDate=new MyDate(aDate.getTime())
-				tNextDate.nextHours(tDate.getHours(),tDate.getMinutes())
-				return tNextDate;
+				let tParDate=new MyDate(aDate.getTime())
+				tParDate.nextHours(tDate.getHours(),tDate.getMinutes())
+				return tParDate;
 				break;
 			case "parWeek":
-				let tNextDate=new MyDate(aDate.getTime())
-				tNextDate.nextDayOfWeek(tDate.getDay())
-				tNextDate.setHours(tDate.getHours(),tDate.getMinutes(),0,0)
-				if((tNextDate.getTime()-aDate.getTime())<0){
-					tNextDate.setDate(tNextDate.getDate()+7)
+				let tParWeek=new MyDate(aDate.getTime())
+				tParWeek.nextDayOfWeek(tDate.getDay())
+				tParWeek.setHours(tDate.getHours(),tDate.getMinutes(),0,0)
+				if((tParWeek.getTime()-aDate.getTime())<0){
+					tParWeek.setDate(tParWeek.getDate()+7)
 				}
-				return tNextDate;
+				return tParWeek;
 				break;
 			case "onTime":
-				if(tDate.getTime()<aData.getTime())return null;
+				if(tDate.getTime()<aDate.getTime())return null;
 				return tDate;
 				break;
 			default:throw new Error("PopupWindow : 「"+aAlarm.par+"」ってなに?");
@@ -53,20 +54,20 @@ class AlarmComparer{
 		let tDate=new MyDate(aAlarm.time)
 		switch (aAlarm.par) {
 			case "parDate":
-				let tNextDate=new MyDate(aDate1.getTime())
-				tNextDate.setDate(tNextDate.getDate()-1)
-				tNextDate.nextHours(tDate.getHours(),tDate.getMinutes())
-				if(tNextDate.getTime()<aDate2.getTime())return tNextDate;
+				let tParDate=new MyDate(aDate1.getTime())
+				tParDate.setDate(tParDate.getDate()-1)
+				tParDate.nextHours(tDate.getHours(),tDate.getMinutes())
+				if(tParDate.getTime()<aDate2.getTime())return tParDate;
 				else return null;
 				break;
 			case "parWeek":
-				let tNextDate=new MyDate(aDate1.getTime())
-				tNextDate.nextDayOfWeek(tDate.getDay())
-				tNextDate.setHours(tDate.getHours(),tDate.getMinutes(),0,0)
-				if((tNextDate.getTime()-aDate1.getTime())<0){
-					tNextDate.setDate(tNextDate.getDate()+7)
+				let tParWeek=new MyDate(aDate1.getTime())
+				tParWeek.nextDayOfWeek(tDate.getDay())
+				tParWeek.setHours(tDate.getHours(),tDate.getMinutes(),0,0)
+				if((tParWeek.getTime()-aDate1.getTime())<0){
+					tParWeek.setDate(tParWeek.getDate()+7)
 				}
-				if(tNextDate.getTime()<aData2.getTime())return tNextDate;
+				if(tParWeek.getTime()<aData2.getTime())return tParWeek;
 				else return null;
 				break;
 			case "onTime":

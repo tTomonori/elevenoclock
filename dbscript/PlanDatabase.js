@@ -2,7 +2,12 @@ let Plan=require("../data/Plan.js")
 let NeDatabase=require("./NeDatabase.js")
 let ConfigDatabase=require("./ConfigDatabase.js")
 class PlanDatabase extends NeDatabase{
-	load(aCallback){
+	load(aCallback,aDirPath){
+		if(aDirPath!=null){
+			super.load(aDirPath+"/plans.db");
+			aCallback();
+			return;
+		}
 		this.configDb=new ConfigDatabase();
 		this.configDb.load();
 		this.configDb.getDbDirPath((aPath)=>{
