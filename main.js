@@ -19,7 +19,7 @@ let gDayWindow
 let gAlarmMonitor=new AlarmMonitor()
 let gMainTimer=new MainTimer()
 
-app.dock.hide()
+// app.dock.hide()
 
 app.on('ready', ()=>{
   gScreenSize=electron.screen.getPrimaryDisplay().workAreaSize;
@@ -120,7 +120,7 @@ ipcMain.on("setTimer",(e,a)=>{
   gMainTimer.setTimer(a)
 })
 ipcMain.on("stopTimer",(e,a)=>{
-  gMainTimer.stopTimer
+  gMainTimer.stopTimer()
 })
 
 //メニューバーにアイコン追加
