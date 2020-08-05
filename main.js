@@ -24,7 +24,7 @@ app.dock.hide()
 app.on('ready', ()=>{
   gScreenSize=electron.screen.getPrimaryDisplay().workAreaSize;
 
-  createWindow()
+  // createWindow()
   createDayWindow()
   createTray()
 

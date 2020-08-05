@@ -1,5 +1,14 @@
 *{user-select: none;}
 *{cursor: default;}
+*{
+	user-select:none;
+	-webkit-user-select:none;
+	-ms-user-select: none;
+	-moz-user-select:none;
+	-khtml-user-select:none;
+	-webkit-user-drag:none;
+	-khtml-user-drag:none;
+}
 .usagiBlue{
 	background: rgb(210,250,240)
 }
