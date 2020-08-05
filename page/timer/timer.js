@@ -69,13 +69,13 @@ function setTimerInterval(){
 function displayLeftTime(aDate){
 	let tTime=aDate.getTime()-Date.now()
 	let tFeild=document.getElementsByClassName("divFeild")
-	tFeild[0].textContent=Math.floor(tTime/1000/60/60)
+	tFeild[0].textContent=("00"+Math.floor(tTime/1000/60/60)).slice(-2)
 	tTime=tTime%(1000*60*60)
-	tFeild[1].textContent=Math.floor(tTime/1000/60)
+	tFeild[1].textContent=("00"+Math.floor(tTime/1000/60)).slice(-2)
 	tTime=tTime%(1000*60)
-	tFeild[2].textContent=Math.floor(tTime/1000)
+	tFeild[2].textContent=("00"+Math.floor(tTime/1000)).slice(-2)
 	tTime=tTime%(1000)
-	tFeild[3].textContent=Math.floor(tTime/10)
+	tFeild[3].textContent=("00"+Math.floor(tTime/10)).slice(-2)
 }
 function displayTimeObject(aObject){
 	let tFeild=document.getElementsByClassName("textFeild")
