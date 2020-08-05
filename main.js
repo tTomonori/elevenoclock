@@ -19,18 +19,21 @@ let gDayWindow
 let gAlarmMonitor=new AlarmMonitor()
 let gMainTimer=new MainTimer()
 
-// app.dock.hide()
+app.dock.hide()
 
 app.on('ready', ()=>{
   gScreenSize=electron.screen.getPrimaryDisplay().workAreaSize;
 
   // createWindow()
-  createDayWindow()
   createTray()
 
   gAlarmMonitor.setAlarmFunc(gettedAlarmData)
   gAlarmMonitor.set()
   gMainTimer.setTimerCallback(timerRing)
+
+  setTimeout(()=>{
+    createDayWindow()
+  },500)
 
   electron.powerMonitor.on("resume",()=>{
     console.log("resume");

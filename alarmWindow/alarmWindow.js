@@ -37,6 +37,9 @@ window.onload=()=>{
     case "alarm":
       tType.src="../image/megaphone.png"
       break;
+    case "timer":
+      tType.src="../image/clock.png"
+      break;
     default:
   }
 }
