@@ -56,7 +56,7 @@ app.on('activate', function () {
 //dayウィンドウ生成
 function createDayWindow(){
   if(gDayWindow!=null)return;
-  gDayWindow = new BrowserWindow({width: 466, height: 615,x: gScreenSize.width, y: 0, transparent: true, frame: false, resizable:false, hasShadowcd:false})
+  gDayWindow = new BrowserWindow({width: 466, height: 615,x: gScreenSize.width, y: 0, transparent: true, frame: false, resizable:false, hasShadowcd:false, alwaysOnTop:true})
   gDayWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'dayWindow/dayWindow.html'),
     protocol: 'file:',
@@ -93,7 +93,7 @@ function createWindow () {
 function createAlarmWindow(aName,aHour,aMinute,aType){
   for(let i=0;;i++){
     if(gAlarmWindows[i]!=null)continue;
-    gAlarmWindows[i] = new BrowserWindow({width: 250, height: 250,x:250*i,y:0, transparent: true, frame: false, resizable:false, hasShadowcd:false})
+    gAlarmWindows[i] = new BrowserWindow({width: 250, height: 250,x:250*i,y:0, transparent: true, frame: false, resizable:false, hasShadowcd:false, alwaysOnTop:true})
     gAlarmWindows[i].loadURL(`file://${__dirname}/alarmWindow/alarmWindow.html?name=`+aName+"&hour="+aHour+"&minute="+aMinute+"&type="+aType)
     // gAlarmWindows[i].webContents.openDevTools()
     gAlarmWindows[i].on('closed', function () {
