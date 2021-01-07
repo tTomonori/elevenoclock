@@ -72,6 +72,7 @@ class AlarmSearcher{
 		let tDataList=[]
 		for(let i=0;i<aList.length;i++){
 			let tData=aList[i]
+			if(!tData.alarmOn)continue;
 			let tTimeList=AlarmComparer.searchPassedAlarm(aDate1,aDate2,tData.alarm)
 			for(let j=0;j<tTimeList.length;j++){
 				tDataList.push({data:tData,time:tTimeList[j]})
